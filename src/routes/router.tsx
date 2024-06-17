@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Category, Home, Products} from "../ui/pages";
+import { Categories, Home, Products} from "../ui/pages";
 import { App } from "../App";
 
 
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/categories",
-                element: <Category />,
+                element: <Categories />,
             },
             
             {
