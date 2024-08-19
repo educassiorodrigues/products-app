@@ -52,7 +52,7 @@ describe('Categories', () => {
         expect(item[2]).toHaveTextContent('Category 3');
     })
 
-    it('Given no one categories when render then not show item with message "no categories"', () => {
+    it('Given no one categories when render then show item with message "no categories"', () => {
         //arrange
         render(<CategoriesList categories={[]} />)
 
