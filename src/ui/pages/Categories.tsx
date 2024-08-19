@@ -1,7 +1,8 @@
 import { useState } from "react"
-import { useCategoriesQuery } from "../../api/queries/categories.query"
 import { useCategoriesMutations } from "../../api/mutations/categories.mutation"
+import { useCategoriesQuery } from "../../api/queries/categories.query"
 import { CategoriesList } from "../components"
+import { InputGroup } from "../components/shared/InputGroupComposition/InputGroup"
 
 export const Categories = () => {
     const [newCategory, setNewCategory] = useState<string>('')
@@ -14,25 +15,23 @@ export const Categories = () => {
     }
 
     const handleAddCategory = () => {
-        createCategoryMutation.mutate(newCategory);
-        setNewCategory('');
+        createCategoryMutation.mutate(newCategory, {
+            onSuccess: () => {
+                setNewCategory('');
+            }
+        });
     }
 
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-col  gap-2">
-                <div className="flex flex-col justify-start gap-2">
-                    <label htmlFor="add-category" data-testid="add-category-title" className="font-bold text-blue-400 text-start">Add Category</label>
-                    <input
-                        className="border border-gray-900 rounded-sm my-2"
-                        id="add-category"
-                        type="text"
-                        value={newCategory}
-                        onChange={event => setNewCategory(event.target.value)}
-                    />
-                </div>
+                <InputGroup.Root>
+                    <InputGroup.Label label="Add Category" data-testid="add-category-title" />
+                    <InputGroup.InputText id="add-category" onChange={event => setNewCategory(event.target.value)} value={newCategory} />
+                </InputGroup.Root>
+
                 <button
-                    className="border border-gray-900 rounded-sm my-2 bg-blue-400 text-white px-5 max-w-[287px]"
+                    className="border border-gray-900 rounded-sm bg-blue-400 text-white px-5 max-w-[287px]"
                     type="button" onClick={handleAddCategory}>
                     Add Category
                 </button>
