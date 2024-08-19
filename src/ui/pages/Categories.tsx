@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useCategoriesQuery } from "../../api/queries/categories.query"
 import { useCategoriesMutations } from "../../api/mutations/categories.mutation"
+import { CategoriesList } from "../components"
 
 export const Categories = () => {
     const [newCategory, setNewCategory] = useState<string>('')
@@ -31,21 +32,18 @@ export const Categories = () => {
                     />
                 </div>
                 <button
-                    className="border border-gray-900 rounded-sm my-2 bg-blue-400 text-white px-5 rounded-sm max-w-[287px]"
+                    className="border border-gray-900 rounded-sm my-2 bg-blue-400 text-white px-5 max-w-[287px]"
                     type="button" onClick={handleAddCategory}>
                     Add Category
                 </button>
             </div>
 
-            <h1 className="font-bold text-xl  text-blue-700">Categories</h1>
-            <ul className="text-start">
-                {getCategoriesQuery.isSuccess && getCategoriesQuery.data.map((category) => (
-                    <li key={category.id}>-{category.description}</li>
-                ))}
+            <h1 className="font-bold text-xl  text-blue-700" data-testid="categories-title">Categories</h1>
 
-                {getCategoriesQuery.isSuccess && getCategoriesQuery.data.length === 0 && <h1>No categories</h1>}
-                {getCategoriesQuery.isPending && <h1>Loading</h1>}
-            </ul>
-        </div>
+            {getCategoriesQuery.isSuccess && <CategoriesList categories={getCategoriesQuery.data} />}
+
+            {getCategoriesQuery.isPending && <span data-testid="loading">Loading</span>}
+
+        </div >
     )
 }

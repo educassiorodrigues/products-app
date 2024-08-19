@@ -1,6 +1,6 @@
 import axios from "axios"
 
-interface Category {
+export interface Category {
     id: string
     description: string
 }
