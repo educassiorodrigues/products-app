@@ -2,8 +2,6 @@ import { useProductsQuery } from "../../api/queries/products.query"
 
 export const Products = () => {
     const { getProductsQuery } = useProductsQuery()
-    
-
     return (
         <div>
             <h1>Products</h1>
@@ -16,8 +14,6 @@ export const Products = () => {
                     ))}
                 </ul>
             )}
-
-          
         </div>
     )
 }

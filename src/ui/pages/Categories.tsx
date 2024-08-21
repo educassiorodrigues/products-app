@@ -42,7 +42,6 @@ export const Categories = () => {
             {getCategoriesQuery.isSuccess && <CategoriesList categories={getCategoriesQuery.data} />}
 
             {getCategoriesQuery.isPending && <span data-testid="loading">Loading</span>}
-
         </div >
     )
 }
