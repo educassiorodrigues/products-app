@@ -4,7 +4,7 @@ import { CategoriesList } from './CategoriesList'
 import { Category } from '../../../api/services';
 import '@testing-library/jest-dom'
 
-describe('Categories', () => {
+describe('Categories List Component', () => {
     it('Given  categories when render then show categories list', () => {
         //arrange
         render(<CategoriesList categories={[]} />)
