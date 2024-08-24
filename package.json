@@ -8,9 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "tests": "vitest",
-    "start-server": "dotnet run --project ../Cassio.Produtos/src/Cassio.Produtos.Api/",
-    "coverage": "vitest run --coverage"
+    "tests": "vitest --ui --coverage.enabled=true",
+    "start-server": "dotnet run --project ../Cassio.Produtos/src/Cassio.Produtos.Api/"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.29.2",
@@ -30,6 +29,7 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/ui": "^2.0.5",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",

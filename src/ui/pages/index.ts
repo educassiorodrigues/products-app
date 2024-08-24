@@ -1,3 +1,3 @@
 export * from './Home'
 export * from './Products'
-export * from './Categories/Categories'
+export * from './categories/Categories'
