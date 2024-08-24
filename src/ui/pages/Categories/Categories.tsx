@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { useCategoriesMutations } from "../../api/mutations/categories.mutation"
-import { useCategoriesQuery } from "../../api/queries/categories.query"
-import { CategoriesList } from "../components"
-import { InputGroup } from "../components/shared/InputGroupComposition/InputGroup"
+import { useCategoriesMutations } from "../../../api/mutations/categories.mutation"
+import { useCategoriesQuery } from "../../../api/queries/categories.query"
+import { CategoriesList } from "../../components"
+import { InputGroup } from "../../components/shared/InputGroupComposition/InputGroup"
 
 export const Categories = () => {
     const [newCategory, setNewCategory] = useState<string>('')
