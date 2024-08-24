@@ -16,3 +16,7 @@ export const handleNotEmptyResponseMock = http.get(`${import.meta.env.VITE_API_U
 export const handleEmptyResponseMock = http.get(`${import.meta.env.VITE_API_URL}/categories`, () => {
     return HttpResponse.json([])
 })
+
+export const handleCreateNewCategoryMock = http.post(`${import.meta.env.VITE_API_URL}/categories`, () => {
+    return HttpResponse.json(null, {status: 201})
+})

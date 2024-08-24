@@ -27,12 +27,13 @@ export const Categories = () => {
             <div className="flex flex-col  gap-2">
                 <InputGroup.Root>
                     <InputGroup.Label label="Add Category" data-testid="add-category-title" />
-                    <InputGroup.InputText id="add-category" onChange={event => setNewCategory(event.target.value)} value={newCategory} />
+                    <InputGroup.InputText data-testid="add-category" onChange={event => setNewCategory(event.target.value)} value={newCategory} />
                 </InputGroup.Root>
 
                 <button
                     className="border border-gray-900 rounded-sm bg-blue-400 text-white px-5 max-w-[287px]"
-                    type="button" onClick={handleAddCategory}>
+                    type="button" 
+                    onClick={handleAddCategory}>
                     Add Category
                 </button>
             </div>
