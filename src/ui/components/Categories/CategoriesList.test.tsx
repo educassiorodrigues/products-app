@@ -10,7 +10,7 @@ describe('Categories List Component', () => {
         render(<CategoriesList categories={[]} />)
 
         //act
-        const ul = screen.getByTestId('categories-list');
+        const ul = screen.getByTestId('list-group');
 
         //asserts
         expect(ul).toBeDefined();
@@ -27,7 +27,7 @@ describe('Categories List Component', () => {
         render(<CategoriesList categories={categories} />)
 
         //act
-        const item = screen.getAllByTestId('category-list-item');
+        const item = screen.getAllByTestId('list-group-item');
 
         //asserts
         expect(item).toHaveLength(3);
@@ -44,7 +44,7 @@ describe('Categories List Component', () => {
         render(<CategoriesList categories={categories} />)
 
         //act
-        const item = screen.getAllByTestId('category-list-item');
+        const item = screen.getAllByTestId('list-group-item');
 
         //asserts
         expect(item[0]).toHaveTextContent('Category 1');
@@ -52,15 +52,15 @@ describe('Categories List Component', () => {
         expect(item[2]).toHaveTextContent('Category 3');
     })
 
-    it('Given no one categories when render then show item with message "no categories"', () => {
+    it('Given no one categories when render then show item with message "Nenhuma categoria cadastrada."', () => {
         //arrange
         render(<CategoriesList categories={[]} />)
 
         //act
-        const item = screen.getByTestId('categories-no-categories');
+        const item = screen.getByTestId('no-items');
 
         //asserts
-        expect(item).toHaveTextContent('No categories');
+        expect(item).toHaveTextContent('Nenhuma categoria cadastrada.');
         expect(item).toBeInTheDocument();
     })
 })

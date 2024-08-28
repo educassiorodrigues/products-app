@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
+import { Button, Card, Col, Form, Row } from "react-bootstrap"
 import { useCategoriesMutations } from "../../../api/mutations/categories.mutation"
 import { useCategoriesQuery } from "../../../api/queries/categories.query"
 import { CategoriesList } from "../../components"
-import { InputGroup } from "../../components/shared/InputGroupComposition/InputGroup"
 
 export const Categories = () => {
     const [newCategory, setNewCategory] = useState<string>('')
@@ -14,7 +14,9 @@ export const Categories = () => {
         return getCategoriesQuery.error.toString();
     }
 
-    const handleAddCategory = () => {
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault();
+
         createCategoryMutation.mutate(newCategory, {
             onSuccess: () => {
                 setNewCategory('');
@@ -23,26 +25,40 @@ export const Categories = () => {
     }
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex flex-col  gap-2">
-                <InputGroup.Root>
-                    <InputGroup.Label label="Add Category" data-testid="add-category-title" />
-                    <InputGroup.InputText data-testid="add-category" onChange={event => setNewCategory(event.target.value)} value={newCategory} />
-                </InputGroup.Root>
+        <Card className="p-4">
+            <Form onSubmit={handleSubmit}>
+                <Row>
+                    <Col sm="8">
+                        <Form.Group>
+                            <Form.Label>Nome da Categoria</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Nova categoria" 
+                                value={newCategory} 
+                                onChange={event => setNewCategory(event.target.value)} 
+                            />
+                        </Form.Group>
+                    </Col>
 
-                <button
-                    className="border border-gray-900 rounded-sm bg-blue-400 text-white px-5 max-w-[287px]"
-                    type="button" 
-                    onClick={handleAddCategory}>
-                    Add Category
-                </button>
-            </div>
+                    <Col sm="4" className="d-flex align-items-end justify-content-end">
+                        <Button type="submit">
+                           Adicionar Categoria
+                        </Button>
+                    </Col>
+                </Row>
 
-            <h1 className="font-bold text-xl  text-blue-700" data-testid="categories-title">Categories</h1>
+            </Form>
 
-            {getCategoriesQuery.isSuccess && <CategoriesList categories={getCategoriesQuery.data} />}
+            <Row>
+                <h2 className="font-bold text-xl  text-blue-700" data-testid="categories-title">Categorias</h2>
 
-            {getCategoriesQuery.isPending && <span data-testid="loading">Loading</span>}
-        </div >
+                
+
+                {getCategoriesQuery.isSuccess && <CategoriesList categories={getCategoriesQuery.data} />}
+
+                {getCategoriesQuery.isPending && <span data-testid="loading">Loading</span>}
+            </Row>
+        </Card>
+
     )
 }

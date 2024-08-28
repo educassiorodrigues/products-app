@@ -1,3 +1,4 @@
+import { ListGroup } from "react-bootstrap"
 import { Category } from "../../../api/services"
 
 interface CategoriesListProps {
@@ -5,12 +6,12 @@ interface CategoriesListProps {
 }
 export const CategoriesList = (props: CategoriesListProps) => {
     return (
-        <ul className="text-start" data-testid="categories-list">
-            {props.categories.map((category) => (
-                <li key={category.id} data-testid="category-list-item">-{category.description}</li>
-            ))}
+        <ListGroup data-testid="list-group">
+            {props.categories.map((category, index) => (
+                  <ListGroup.Item key={category.id} data-testid="list-group-item">{index}: {category.description}</ListGroup.Item>
+             ))}
 
-            {props.categories.length === 0 && <li data-testid="categories-no-categories">No categories</li>}
-        </ul>
+             {props.categories.length === 0 && <ListGroup.Item data-testid="no-items">Nenhuma categoria cadastrada.</ListGroup.Item>}   
+        </ListGroup>
     )
 }

@@ -1,4 +1,3 @@
-import axios from "axios"
 import { instance } from "../http"
 
 export interface Category {
@@ -10,5 +9,5 @@ export const listCategories = async () : Promise<Category[]> => {
 }
 
 export const createCategory = async (description: string) : Promise<void> => {
-    return (await axios.post('categories', { description }))
+    return (await instance.post('categories', { description }))
 }

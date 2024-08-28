@@ -1,20 +1,29 @@
+import { Container, Nav, Navbar } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 
-const Item = (props: { to: string, text:string }) => {
+const NavLink = (props: { to: string, text:string }) => {
     return (
-        <li className="text-blue-400 hover:text-opacity-80">
+        <Nav.Link>
             <Link to={props.to}>{props.text}</Link>
-        </li>
+        </Nav.Link>
     )
 }
 
 export const Menu = () => {
     return (
-        <ul className="flex gap-2 font-bold ">
-            <Item to="/" text="Home"/>
-            <Item to="/products" text="Produtos"/>
-            <Item to="/categories" text="Categorias"/>
-        </ul>
+        <Navbar>
+            <Container>
+                <Navbar.Brand href="/">Produtos</Navbar.Brand>
+                <Navbar.Collapse>
+                    <Nav>
+                        <NavLink to="/" text="Home"/>
+                        <NavLink to="/products" text="Produtos"/>
+                        <NavLink to="/categories" text="Categorias"/>
+                    </Nav>
+                </Navbar.Collapse>
+            
+            </Container>
+        </Navbar>
     )
 }

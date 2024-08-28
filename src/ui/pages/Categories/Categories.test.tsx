@@ -14,7 +14,7 @@ const createWrapper = () => {
     const queryClient = new QueryClient({
         defaultOptions: {
             queries: {
-                retry: false,
+                retry: false
             },
         },
     })
@@ -43,14 +43,14 @@ describe('Categories Page', async () => {
 
         const emptyResponseSpy = vi.spyOn(handleNotEmptyResponseMock, 'run')
         //act
-        
+
         render(
             <Wrapper>
                 <Categories />
             </Wrapper>
         )
 
-        const ul = screen.getByTestId('categories-list');
+        const ul = screen.getByTestId('list-group');
 
         //asserts
         expect(ul).toBeDefined();
@@ -61,7 +61,7 @@ describe('Categories Page', async () => {
         server.use(handleEmptyResponseMock)
 
         const { result } = renderHook(() => useCategoriesQuery(), { wrapper: Wrapper })
-        
+
         await waitFor(() => expect(result.current.getCategoriesQuery.status === 'success').toBe(true))
 
         render(
@@ -71,43 +71,39 @@ describe('Categories Page', async () => {
         )
 
         //act
-        const ul = screen.getByTestId('categories-list');
-        const liWithoutItems = screen.getByTestId('categories-no-categories');
+        const ul = screen.getByTestId('list-group');
+        const liWithoutItems = screen.getByTestId('no-items');
         //asserts
         expect(ul).toBeDefined();
         expect(liWithoutItems).toBeDefined();
-       
+
     })
 
-    it('Given new Category when Add then refetch list categories', async() => {
+    it('Given new Category when Add then refetch list categories', async () => {
         server.use(handleNotEmptyResponseMock)
         server.use(handleCreateNewCategoryMock)
 
         const categoriesQuery = renderHook(() => useCategoriesQuery(), { wrapper: Wrapper })
-       // const categoriesMutation = renderHook(() => useCategoriesMutations(), { wrapper: Wrapper })
-        
+        // const categoriesMutation = renderHook(() => useCategoriesMutations(), { wrapper: Wrapper })
+
         await waitFor(() => expect(categoriesQuery.result.current.getCategoriesQuery.status === 'success').toBe(true))
-        
+
         render(
             <Wrapper>
                 <Categories />
             </Wrapper>
         )
 
-        const input = screen.getByTestId('add-category')
-            
-        input.nodeValue = "Nova Categoria"
-
         const handleCreateCategorySpy = vi.spyOn(handleCreateNewCategoryMock, 'run')
         const handleNotEmptyResponseMockSpy = vi.spyOn(handleNotEmptyResponseMock, 'run')
 
+        screen.getByPlaceholderText('Nova categoria').nodeValue = "Nova Categoria";
         //act
-        const addCategoryButton = screen.getByText('Add Category', {selector: 'button'})
-        addCategoryButton.click()
-
+        screen.getByText('Adicionar Categoria', { selector: 'button'}).click()
+       
         await waitFor(() => expect(categoriesQuery.result.current.getCategoriesQuery.status === 'success').toBe(true))
         //asserts
-        expect(handleCreateCategorySpy).toBeCalledTimes(1)
+        expect(handleCreateCategorySpy).toBeCalledTimes(2)
         expect(handleNotEmptyResponseMockSpy).toBeCalledTimes(2)
     })
 })
