@@ -100,7 +100,7 @@ describe('Categories Page', async () => {
         const handleCreateCategorySpy = vi.spyOn(handleCreateNewCategoryMock, 'run')
         const handleNotEmptyResponseMockSpy = vi.spyOn(handleNotEmptyResponseMock, 'run')
 
-        screen.getByPlaceholderText('Nova categoria').nodeValue = "Nova Categoria";
+        screen.getByPlaceholderText('Nova categoria').nodeValue = "Nova Categoria";    
         //act
         screen.getByText('Adicionar Categoria', { selector: 'button'}).click()
        
