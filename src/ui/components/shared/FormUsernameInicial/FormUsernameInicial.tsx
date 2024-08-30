@@ -9,11 +9,14 @@ interface FormUserNameInicialProps {
 }
 
 export const FormUserNameInicial = ({ overlayVisivel }: FormUserNameInicialProps): ReactNode => {
-    const { userName, setUserName, hideOverlay } = useOverlay()
+    const { userName, setUserName, hideOverlay, defineUsernameClarity } = useOverlay()
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
+
         hideOverlay();
+
+        defineUsernameClarity();
     }
 
     return (

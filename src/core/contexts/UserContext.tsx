@@ -8,6 +8,7 @@ interface OverlayContextType {
     showOverlay: () => void;
     hideOverlay: () => void;
     setUserName: (name: string) => void;
+    defineUsernameClarity: () => void;
 }
 
 export const OverlayContext = createContext<OverlayContextType | undefined>(undefined);
@@ -20,8 +21,12 @@ export const OverlayProvider = ({ children }: { children: ReactNode }) => {
     const hideOverlay = () => setOverlayVisivel(false);
     const handleSetUserName = (name: string) => setUserName(name);
 
+    function defineUsernameClarity()  {
+        window.clarity('set', 'userName', userName);
+    }
+
     return (
-        <OverlayContext.Provider value={{ overlayVisivel, userName, showOverlay, hideOverlay, setUserName: handleSetUserName }}>
+        <OverlayContext.Provider value={{ overlayVisivel, userName, showOverlay, hideOverlay, setUserName: handleSetUserName, defineUsernameClarity}}>
             {overlayVisivel 
                 ? <FormUserNameInicial overlayVisivel={overlayVisivel} /> 
                 : <>{children}</> }
