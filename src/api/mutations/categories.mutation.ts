@@ -1,8 +1,13 @@
-import { useMutation } from "@tanstack/react-query"
-import { createCategory } from "../services"
+import { useMutation, UseMutationResult } from "@tanstack/react-query"
+import { createCategory, deleteCategory } from "../services"
 import { useCategoriesQuery } from "../queries/categories.query"
 
-export const useCategoriesMutations = () => {
+interface CategoriesMutations {
+    createCategoryMutation:  UseMutationResult<void, Error, string, unknown>
+    deleteCategoryMutation:  UseMutationResult<void, Error, string, unknown>
+}
+
+export const useCategoriesMutations = () : CategoriesMutations => {
     const { getCategoriesQuery } = useCategoriesQuery()
     
     const createCategoryMutation = useMutation({
@@ -12,7 +17,17 @@ export const useCategoriesMutations = () => {
         },
     })
 
+    const deleteCategoryMutation = useMutation({
+        mutationFn: deleteCategory,
+        onSuccess: () => {
+            getCategoriesQuery.refetch()
+        },
+    })
+
+
+
     return {
-        createCategoryMutation
+        createCategoryMutation,
+        deleteCategoryMutation
     }
 }

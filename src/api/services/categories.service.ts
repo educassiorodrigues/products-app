@@ -11,3 +11,7 @@ export const listCategories = async () : Promise<Category[]> => {
 export const createCategory = async (description: string) : Promise<void> => {
     return (await instance.post('categories', { description }))
 }
+
+export const deleteCategory = async (id: string) : Promise<void> => {
+    return (await instance.delete(`categories/${id}`))
+}

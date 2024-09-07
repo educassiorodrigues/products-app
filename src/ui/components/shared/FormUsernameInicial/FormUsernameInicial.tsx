@@ -13,7 +13,7 @@ export const FormUserNameInicial = ({ overlayVisivel }: FormUserNameInicialProps
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-
+        
         hideOverlay();
 
         defineUsernameClarity();

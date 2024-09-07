@@ -7,7 +7,7 @@ import { CategoriesList } from "../../components"
 export const Categories = () => {
     const [newCategory, setNewCategory] = useState<string>('')
 
-    const { createCategoryMutation } = useCategoriesMutations()
+    const { createCategoryMutation, deleteCategoryMutation } = useCategoriesMutations()
     const { getCategoriesQuery } = useCategoriesQuery()
 
     if (getCategoriesQuery.isError) {
@@ -22,6 +22,10 @@ export const Categories = () => {
                 setNewCategory('');
             }
         });
+    }
+
+    const handleDeleteCategory = (id: string) => {
+        deleteCategoryMutation.mutate(id);
     }
 
     return (
@@ -54,7 +58,7 @@ export const Categories = () => {
 
                 
 
-                {getCategoriesQuery.isSuccess && <CategoriesList categories={getCategoriesQuery.data} />}
+                {getCategoriesQuery.isSuccess && <CategoriesList categories={getCategoriesQuery.data} deleteCategory={handleDeleteCategory} />}
 
                 {getCategoriesQuery.isPending && <span data-testid="loading">Loading</span>}
             </Row>
